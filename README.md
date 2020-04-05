@@ -20,7 +20,7 @@ Let's start first with installing the required libraries:
 
 <code>python -m pip install --user numpy pandas nltk SQLAlchemy scikit-learn</code>
 
-For more installation options for Windows/Mac check the hyperlinks provided in the previous section.
+For more installation options for Windows/Mac check the hyperlinks provided in the **previous** section.
 
 ## Running the tests
 
@@ -33,7 +33,7 @@ then type:
 
 <code>import nltk</code>
 
-<code>import sqlalchemy<code>
+<code>import sqlalchemy</code>
 
 <code>import sklearn</code>
 
