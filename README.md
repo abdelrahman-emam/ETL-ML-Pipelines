@@ -8,7 +8,7 @@ This project is a deployment for the ETL (**E**xtract - **T**ransform - **L**oad
 ## Prerequisites
 In order to run this project locally on your machine, you should've the following
 
-- [pip]((https://bit.ly/2x4hZQu)
+- [pip](https://bit.ly/2x4hZQu)
 - [numpy](https://scipy.org/install.html)
 - [pandas](https://pandas.pydata.org/docs/getting_started/index.html#getting-started)
 - [nltk](https://www.nltk.org/install.html)
