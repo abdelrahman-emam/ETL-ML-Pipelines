@@ -24,7 +24,7 @@ For more installation options for Windows/Mac check the hyperlinks provided in t
 
 ## Running the tests
 
-If all the libraries are installed correctly open terminal (ctrl + alt + t) or any Python editor of your choice in case you used terminal type <code>python3</code>
+If all the libraries are installed correctly open terminal (ctrl + alt + t) or any Python editor of your choice, in case you used terminal type <code>python3</code>
 then type:
 
 <code>import numpy</code>
