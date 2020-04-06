@@ -73,11 +73,11 @@ The script file *'run.py'* runs where the user can input a message into the app,
 3. Go to localhost:3001
 
 ## The webapp
-the webapp can be used to test the performance of your model live by typing out a custom message and see how will your model predict its category
+the webapp can be used to test the performance of your model **live** by typing out a custom message and see how will your model clarfiy its category(categories).
 
 ![clarify](imgs/clarify.png)
 
-Also you can find out the categories of the messages in the dataset.
+Also you can find out the categories of the messages used in the dataset.
 
 ![plot](imgs/msg_plot.png)
 
