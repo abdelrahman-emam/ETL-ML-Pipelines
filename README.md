@@ -57,7 +57,7 @@ The script file *'train_classifier.py'* takes the database file path and model f
 #### Third:
 The script file *'run.py'* runs where the user can input a message into the app, the app returns classification results for all 36 categories.
 
-### How to use
+### How to use (on local machine)
 1. Run the following commands in the project's root directory to set up your database and model.
   - To run ETL pipeline that cleans data and stores in database
 
@@ -70,7 +70,7 @@ The script file *'run.py'* runs where the user can input a message into the app,
 2. Run the following command in the app's directory to run the web app.
 <code>python run.py</code>
 
-3. Go to http://0.0.0.0:3001/
+3. Go to localhost:3001
 
 ## Evaluation
 The model is evaluated using **confusion matrix**, here's a simple illustration, for more info click [here](https://towardsdatascience.com/understanding-confusion-matrix-a9ad42dcfd62)
