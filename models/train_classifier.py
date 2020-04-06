@@ -1,6 +1,5 @@
 import sys
 import pandas as pd
-import re
 import numpy as np
 import nltk
 nltk.download(['punkt', 'wordnet'])
@@ -17,17 +16,32 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 def load_data(database_filepath):
+    '''loading the database file
+    
+    Args:
+        database_filepath: file path of the database to work on
+        
+    Returns:
+        X : that resembles the input feature -messages-
+        Y : that resembles the response vecotr
+        category names: holds the names of the categories'''
     engine = create_engine('sqlite:///' + str(database_filepath))
     df = pd.read_sql_table('table_name', 'sqlite:///' + str(database_filepath))
     
-    X = df['message']
-    Y = df[df.columns[4:]]
-    category_names = Y.columns.tolist()
+    X = df['message'] # assigning X to the messages col
+    Y = df[df.columns[4:]] # assigning Y to response cols
+    category_names = Y.columns.tolist() # getting column names
     
     return X, Y, category_names
 
 def tokenize(text):
+    '''Using nltk to normalize, lemmatize and tokenize text
     
+    Args:
+        text: to normalize, lemmatize, tokenize and apply tf-idf
+        
+    Returns:
+        clean tokens from stopwords, ..etc.'''
     tokens = word_tokenize(text) # tokenize text
     
     lemmatizer = WordNetLemmatizer() # initiate lemmatizer
@@ -43,17 +57,22 @@ def tokenize(text):
     return clean_tokens
 
 def build_model():
+    '''building our Machine learning pipline, 
+    some parameters for the model to tune through
+    
+    Args:
+        None
+        
+    Returns:
+        Machine Learning model'''
     pipeline = Pipeline([('vect', CountVectorizer(tokenizer = tokenize)),
                          ('tfidf', TfidfTransformer()),
-                         ('moc', MultiOutputClassifier(KNeighborsClassifier()))])
+                         ('moc', MultiOutputClassifier(KNeighborsClassifier()))])    
     
-    # Splitting the data
-    # X_train, X_test, y_train, y_test = train_test_split(X, Y)
-    
-    # Tunning our model
+    # Parameters to tune our model through
     parameters = {
-    'tfidf__use_idf': (True, False)
-#     'moc__n_jobs':(1, 2)
+    'tfidf__use_idf': (True, False),
+    'moc__n_jobs':(1, 2)
     }
     
     cv = GridSearchCV(pipeline, parameters, refit = True)
@@ -61,16 +80,37 @@ def build_model():
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    y_pred = model.predict(X_test)
+    '''Prints the f1 score, precision and recall 
+    for the test set for each category using classification_report
+    
+    Args:
+        model: Machine learning model
+        X_test: input test portion of the data
+        Y_test: output test portion of the data 
+        category_names: names of the categories from the database
+        
+    Returns:
+        None
+    '''
+    y_pred = model.predict(X_test) # predict on test data
     
     for idx, val in enumerate(category_names):
-        print(val)
+        print(val) #printing the name of each column
         print(classification_report(Y_test.values[:,idx], y_pred[:,idx]))
+        # printing the classification report for each category
 
 
 def save_model(model, model_filepath):
+    '''Saving the model as .pkl file
+    
+    Args:
+        model: machine learning model
+        model_filepath: the file path to store the model in
+    
+    Returns:
+        None
+    '''
     pickle.dump(model, open(model_filepath, 'wb'))
-
 
 def main():
     if len(sys.argv) == 3:
