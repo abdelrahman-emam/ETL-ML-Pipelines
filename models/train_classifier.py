@@ -9,7 +9,7 @@ from sklearn.pipeline import Pipeline
 from nltk.tokenize import word_tokenize
 from sqlalchemy import create_engine
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -67,14 +67,16 @@ def build_model():
         Machine Learning model'''
     pipeline = Pipeline([('vect', CountVectorizer(tokenizer = tokenize)),
                          ('tfidf', TfidfTransformer()),
-                         ('moc', MultiOutputClassifier(KNeighborsClassifier()))])    
-    
+                         ('moc', MultiOutputClassifier(RandomForestClassifier()))])
+   
     # Parameters to tune our model through
     parameters = {
-    'tfidf__use_idf': (True, False),
-    'moc__n_jobs':(1, 2)
+    'moc__estimator__criterion': ['gini', 'entropy'],
+    'moc__estimator__max_depth': [None, 20, 50],
+    'moc__estimator__max_features': ['auto', 10, 20]
     }
     
+    # Gridsearch the pipeline using the given parameters
     cv = GridSearchCV(pipeline, parameters, refit = True)
     
     return cv
@@ -95,7 +97,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     y_pred = model.predict(X_test) # predict on test data
     
     for idx, val in enumerate(category_names):
-        print(val) #printing the name of each column
+        print(val) # printing the name of each column
         print(classification_report(Y_test.values[:,idx], y_pred[:,idx]))
         # printing the classification report for each category
 
