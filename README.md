@@ -70,7 +70,7 @@ The script file *'run.py'* runs where the user can input a message into the app,
 2. Run the following command in the app's directory to run the web app.
 <code>python run.py</code>
 
-3. Go to localhost:3001
+3. Go to <code>localhost:3001</code>
 
 ## The webapp
 the webapp can be used to test the performance of your model **live** by typing out a custom message and see how will your model clarfiy its category(categories).
