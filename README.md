@@ -72,6 +72,15 @@ The script file *'run.py'* runs where the user can input a message into the app,
 
 3. Go to localhost:3001
 
+## The webapp
+the webapp can be used to test the performance of your model live by typing out a custom message and see how will your model predict its category
+
+![clarify](imgs/clarify.png)
+
+Also you can find out the categories of the messages in the dataset.
+
+![plot](imgs/msg_plot.png)
+
 ## Evaluation
 The model is evaluated using **confusion matrix**, here's a simple illustration, for more info click [here](https://towardsdatascience.com/understanding-confusion-matrix-a9ad42dcfd62)
 
